@@ -1,0 +1,28 @@
+namespace online.snapbase.chromosome
+
+
+/** all the registered user **/
+participant User identified by email {
+  o String email
+  o String fname
+  o String lname
+  o String password
+}
+
+/** status of an application **/
+enum Status {
+  o active
+  o inactive
+}
+
+/** all registered application **/
+asset App identified by appid {
+  o String appid
+  o String name
+  o String description default="Business network"
+  --> User owner
+  o Status status 
+  o String card optional
+  o String port optional
+  o String processid optional
+}

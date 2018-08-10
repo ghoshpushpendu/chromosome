@@ -1,0 +1,35 @@
+<div class="ui centered card create-card">
+  <div class="content">
+    <img class="ui tiny image" src="assets/images/science.png" />
+    <div class="center aligned header header-custom">CHROMOSOME</div>
+    <div class="center aligned description tagline">
+      <p>Your decentralized codeless smart backend</p>
+    </div>
+  </div>
+  <div class="extra content">
+    <form class="ui form" autocomplete="off" (submit)="submit()">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" name="fname" autocomplete="false" placeholder="First Name">
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" name="lname" autocomplete="false" placeholder="Last Name">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="text" name="email" autocomplete="false" placeholder="Email">
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="check" checked tabindex="0" class="hidden">
+          <label>I agree to the Terms and Conditions</label>
+        </div>
+      </div>
+      <div class="ui center aligned">
+        <button class="positive ui button">
+          <i class="icon sign-in"></i> Try Now</button>
+      </div>
+    </form>
+  </div>
+</div>
