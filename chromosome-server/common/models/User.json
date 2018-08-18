@@ -1,0 +1,47 @@
+{
+  "name": "User",
+  "description": "A participant named User",
+  "plural": "User",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "participant",
+      "namespace": "online.snapbase.chromosome",
+      "name": "User",
+      "fqn": "online.snapbase.chromosome.User",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "online.snapbase.chromosome.User",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "email": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": true
+    },
+    "fname": {
+      "type": "string",
+      "required": true
+    },
+    "lname": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

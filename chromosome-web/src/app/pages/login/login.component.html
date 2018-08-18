@@ -7,29 +7,76 @@
     </div>
   </div>
   <div class="extra content">
-    <form class="ui form" autocomplete="off" (submit)="submit()">
-      <div class="field">
-        <label>First Name</label>
-        <input type="text" name="fname" autocomplete="false" placeholder="First Name">
-      </div>
-      <div class="field">
-        <label>Last Name</label>
-        <input type="text" name="lname" autocomplete="false" placeholder="Last Name">
-      </div>
+
+    <!-- form one -->
+    <div *ngIf="authState.state == 'email_validity'" class="ui form" autocomplete="off" (submit)="submit()">
       <div class="field">
         <label>Email</label>
-        <input type="text" name="email" autocomplete="false" placeholder="Email">
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="check" checked tabindex="0" class="hidden">
-          <label>I agree to the Terms and Conditions</label>
-        </div>
+        <input type="text" [disabled]="loading" [(ngModel)]="user.email" #ctrl="ngModel" name="chromosomeemail" autocomplete="false"
+          placeholder="Valid email address">
       </div>
       <div class="ui center aligned">
-        <button class="positive ui button">
-          <i class="icon sign-in"></i> Try Now</button>
+        <button [ngClass]="{'positive': true, 'ui': true, 'button': true,'loading':loading}" (click)="verifyEmail()">
+          <i class="icon sign-in"></i> Verify Now</button>
       </div>
-    </form>
+    </div>
+
+    <!-- form two -->
+    <div class="ui form" *ngIf="this.authState.state == 'get_password'" autocomplete="off" (submit)="submit()">
+      <div class="field">
+        <label>Email</label>
+        <input type="text" name="chromosomeemail" value="ghoshpushpendu@outlook.com" disabled autocomplete="false" placeholder="Valid email address">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" [disabled]="loading" [(ngModel)]="user.password" #ctrl="ngModel" name="chromosomepassword" autocomplete="false"
+          placeholder="Password for this account">
+      </div>
+      <div class="ui center aligned">
+        <button (click)="authenticateUser()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading} ">
+          <i class="icon sign-in "></i>Authenticate Now</button>
+      </div>
+    </div>
+
+    <!-- final registration -->
+    <div class="ui form " *ngIf="this.authState.state=='basic_info'" autocomplete="off " (submit)="submit() ">
+      <div class="field ">
+        <label>Email</label>
+        <input type="text" [disabled]="true" [(ngModel)]="user.email" #ctrl="ngModel" name="chromosomeemail" autocomplete="false"
+          placeholder="Valid email address">
+      </div>
+      <div class="field ">
+        <label>First Name</label>
+        <input type="text" [(ngModel)]="user.fname" #ctrl="ngModel" name="chromosomefname " autocomplete="false
+          " placeholder="First Name ">
+      </div>
+      <div class="field ">
+        <label>Last Name</label>
+        <input type="text" [(ngModel)]="user.lname" #ctrl="ngModel" name="chromosomelname " autocomplete="false
+          " placeholder="Last Name ">
+      </div>
+      <div class="field ">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="user.password" #ctrl="ngModel" name="chromosomepassword " autocomplete="false
+          " placeholder="Password for this account ">
+      </div>
+      <div class="ui center aligned ">
+        <button (click)="registerUser()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading}">
+          <i class="icon sign-in "></i>Register Now</button>
+      </div>
+    </div>
+
+
+    <!-- message area -->
+    <div [ngClass]="{'ui':true,'floating':true,'success':(message_type=='success'),'error':(message_type=='error'),'info':(message_type=='info'),'message':true}"
+      *ngIf="messages.length != 0">
+      <div class="header">
+        Notifications
+      </div>
+      <ul class="list">
+        <li *ngFor="let message of messages">{{message}}</li>
+      </ul>
+    </div>
+
   </div>
 </div>

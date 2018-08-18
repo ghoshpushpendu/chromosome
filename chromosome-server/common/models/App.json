@@ -1,0 +1,69 @@
+{
+  "name": "App",
+  "description": "An asset named App",
+  "plural": "App",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "asset",
+      "namespace": "online.snapbase.chromosome",
+      "name": "App",
+      "fqn": "online.snapbase.chromosome.App",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "online.snapbase.chromosome.App",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "appid": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "default": "Business network",
+      "required": true
+    },
+    "owner": {
+      "type": "any",
+      "description": "The identifier of an instance of owner",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "required": true
+    },
+    "card": {
+      "type": "string",
+      "required": false
+    },
+    "port": {
+      "type": "string",
+      "required": false
+    },
+    "processid": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
