@@ -13,7 +13,7 @@ export class AuthService {
   validateEmail(email: string) {
     let _base = this;
     return new Promise(function (resolve, reject) {
-      _base.httpClient.get("http://apilayer.net/api/check?access_key=a439fe8da36d5f7d82b55576c735b9d7&email=" + email + "&smtp=1&format=1")
+      _base.httpClient.get("https://apilayer.net/api/check?access_key=a439fe8da36d5f7d82b55576c735b9d7&email=" + email + "&smtp=1&format=1")
         .subscribe((data) => {
           resolve(data);
         },
