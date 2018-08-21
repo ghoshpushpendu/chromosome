@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   };
 
   public user = {
-    email: 'contactpushpendu@gmail.com',
+    email: '',
     fname: '',
     lname: '',
     password: ''
@@ -90,9 +90,10 @@ export class LoginComponent implements OnInit {
         _base.messages.push("registered successfully");
         _base.message_type = 'success';
         _base.loading = false;
+        _base.authState.state = "email_validity";
       }, (error) => {
         _base.messages = [];
-        _base.messages.push(error.error.error.message);
+        _base.messages.push("Please fill all the fields and try again");
         _base.message_type = 'error';
         _base.loading = false;
       });

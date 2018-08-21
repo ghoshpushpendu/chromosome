@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { APIURL } from '../urlConfig';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  public httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private httpClient: HttpClient) { }
 
@@ -39,12 +46,18 @@ export class AuthService {
 
   registerUser(user: any) {
     let _base = this;
+    // user.$class = "online.snapbase.chromosome.User";
+    console.log(user);
+
     return new Promise(function (resolve, reject) {
-      _base.httpClient.post(APIURL + 'User', user)
-        .subscribe((data) => {
+      _base.httpClient.post(APIURL + 'User', user, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+      })
+        .subscribe(data => {
           resolve(data);
         },
-          (err) => {
+          err => {
             reject(err);
           })
     });
@@ -53,7 +66,7 @@ export class AuthService {
   authenticateUser(user: any) {
     let _base = this;
     return new Promise(function (resolve, reject) {
-      _base.httpClient.post(APIURL + 'User/verify', user)
+      _base.httpClient.post(APIURL + 'User/verify', user, _base.httpOptions)
         .subscribe((data) => {
           resolve(data);
         },
