@@ -29,12 +29,36 @@ export class LoginComponent implements OnInit {
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
+
+    // if got user
+    if (sessionStorage.getItem("user")) {
+      this.authState.state = "logged_in";
+      this.messages = [];
+      this.messages.push("You are loggied in");
+      this.message_type = 'success';
+    }
   }
 
   /** veirfy and validate email adreess and check if user exists with this email or not **/
   verifyEmail() {
     let _base = this;
+
+    // no email
+    if (this.user.email.trim() == "") {
+      _base.messages = [];
+      _base.messages.push("Email can not be empty");
+      _base.message_type = 'warning';
+      return;
+    } else if (!this.validateEmail(this.user.email)) {
+      _base.messages = [];
+      _base.messages.push("Not a valid email format");
+      _base.message_type = 'warning';
+      return;
+    }
+
     _base.loading = true;
+
+
     this.auth.validateEmail(this.user.email)
       .then((success: any) => {
         let isValid = success.smtp_check;
@@ -83,6 +107,25 @@ export class LoginComponent implements OnInit {
   // register user with provided data
   registerUser() {
     let _base = this;
+
+    // validate data
+    if (this.user.fname.trim() == "") {
+      _base.messages = [];
+      _base.messages.push("First name can not be empty");
+      _base.message_type = 'warning';
+      return;
+    } else if (this.user.lname.trim() == "") {
+      _base.messages = [];
+      _base.messages.push("Last name can not be empty");
+      _base.message_type = 'warning';
+      return;
+    } else if (this.user.password.trim() == "") {
+      _base.messages = [];
+      _base.messages.push("Password can not be empty");
+      _base.message_type = 'warning';
+      return;
+    }
+
     _base.loading = true;
     _base.auth.registerUser(_base.user)
       .then((user) => {
@@ -103,6 +146,14 @@ export class LoginComponent implements OnInit {
   //authenticate user with provided data
   authenticateUser() {
     let _base = this;
+
+    if (this.user.password.trim() == "") {
+      _base.messages = [];
+      _base.messages.push("Password can not be empty");
+      _base.message_type = 'warning';
+      return;
+    }
+
     _base.loading = true;
     _base.auth.authenticateUser(_base.user)
       .then((user: any) => {
@@ -112,6 +163,8 @@ export class LoginComponent implements OnInit {
           _base.messages.push("You have loggied in");
           _base.message_type = 'success';
           _base.authState.state = "logged_in";
+          // set data to local storage
+          sessionStorage.setItem("user", _base.user.email);
         } else {
           _base.messages = [];
           _base.messages.push("No user exists");
@@ -123,6 +176,12 @@ export class LoginComponent implements OnInit {
         _base.message_type = 'error';
         _base.loading = false;
       });
+  }
+
+  //validate email
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
 }
