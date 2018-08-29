@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../providers/auth.service';
+import { Router } from '@angular/router';
 
 declare var $;
 
@@ -26,17 +27,19 @@ export class LoginComponent implements OnInit {
   public messages: any = [];
   public message_type: string = '';
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, public router: Router) {
+    // if got user
+    if (sessionStorage.getItem("user")) {
+      this.router.navigate(["/create"]);
+      // this.authState.state = "logged_in";
+      // this.messages = [];
+      // this.messages.push("You are loggied in");
+      // this.message_type = 'success';
+    }
+  }
 
   ngOnInit() {
 
-    // if got user
-    if (sessionStorage.getItem("user")) {
-      this.authState.state = "logged_in";
-      this.messages = [];
-      this.messages.push("You are loggied in");
-      this.message_type = 'success';
-    }
   }
 
   /** veirfy and validate email adreess and check if user exists with this email or not **/
@@ -134,6 +137,7 @@ export class LoginComponent implements OnInit {
         _base.message_type = 'success';
         _base.loading = false;
         _base.authState.state = "email_validity";
+        _base.user.password = "";
       }, (error) => {
         _base.messages = [];
         _base.messages.push("Please fill all the fields and try again");
@@ -165,6 +169,7 @@ export class LoginComponent implements OnInit {
           _base.authState.state = "logged_in";
           // set data to local storage
           sessionStorage.setItem("user", _base.user.email);
+          this.router.navigate(['/create']);
         } else {
           _base.messages = [];
           _base.messages.push("No user exists");

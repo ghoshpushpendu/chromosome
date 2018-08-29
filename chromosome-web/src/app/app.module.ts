@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { CreateappComponent } from './pages/createapp/createapp.component';
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'create', component: CreateappComponent }
   // { path: 'hero/:id', component: HeroDetailComponent },
   // {
   //   path: 'heroes',
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CreateappComponent
   ],
   imports: [
     BrowserModule,

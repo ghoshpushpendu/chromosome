@@ -1,0 +1,62 @@
+<img class="ui avatar image" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg">
+<span>{{email}}</span>
+
+<div class="ui centered card create-card">
+  <div class="content">
+    <img class="ui tiny image" src="assets/images/science-mini.png" />
+    <div class="center aligned header header-custom">CHROMOSOME</div>
+    <div class="center aligned description tagline">
+      <p>Your decentralized codeless smart backend</p>
+    </div>
+  </div>
+  <div class="extra content">
+    <form class="ui form">
+      <h4 class="ui dividing header">Create your decentralized app</h4>
+
+      <div class="field">
+        <label>Domain</label>
+        <div class="ui labeled input">
+          <div class="ui label">
+            https://
+          </div>
+          <input type="text" name="domain" placeholder="yourdomain.com">
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Name</label>
+          <div class="field">
+            <input type="text" name="appname" placeholder="App Name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Port</label>
+          <div class="field">
+            <input type="number" name="port" placeholder="Port">
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Description</label>
+        <textarea name="description" rows="2"></textarea>
+      </div>
+
+
+      <div class="ui segment">
+        <div class="field">
+          <div class="ui toggle checkbox">
+            <input type="checkbox" checked="checked" name="gift" tabindex="0" class="hidden">
+            <label>I agree to the terms and condition of snapbase</label>
+          </div>
+        </div>
+      </div>
+      <div class="ui center aligned">
+        <button (click)="registerUser()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading}">
+          <i class="icon sign-in "></i>Create App</button>
+      </div>
+    </form>
+  </div>
+</div>
