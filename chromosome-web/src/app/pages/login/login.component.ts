@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
           //check if user exists
           _base.auth.verifyEmail(this.user.email)
             .then((success: any) => {
-              console.log(success.exists);
+              // console.log(success.exists);
               _base.loading = false;
 
               //qualify user existance

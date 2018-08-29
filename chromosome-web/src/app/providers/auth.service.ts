@@ -47,7 +47,7 @@ export class AuthService {
   registerUser(user: any) {
     let _base = this;
     // user.$class = "online.snapbase.chromosome.User";
-    console.log(user);
+    // console.log(user);
 
     return new Promise(function (resolve, reject) {
       _base.httpClient.post(APIURL + 'User', user, {
