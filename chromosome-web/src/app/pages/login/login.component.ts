@@ -28,13 +28,8 @@ export class LoginComponent implements OnInit {
   public message_type: string = '';
 
   constructor(public auth: AuthService, public router: Router) {
-    // if got user
-    if (sessionStorage.getItem("user")) {
+    if (sessionStorage.getItem("email") && sessionStorage.getItem("password")) {
       this.router.navigate(["/create"]);
-      // this.authState.state = "logged_in";
-      // this.messages = [];
-      // this.messages.push("You are loggied in");
-      // this.message_type = 'success';
     }
   }
 
@@ -168,7 +163,8 @@ export class LoginComponent implements OnInit {
           _base.message_type = 'success';
           _base.authState.state = "logged_in";
           // set data to local storage
-          sessionStorage.setItem("user", _base.user.email);
+          sessionStorage.setItem("email", _base.user.email);
+          sessionStorage.setItem("password", _base.user.email);
           this.router.navigate(['/create']);
         } else {
           _base.messages = [];

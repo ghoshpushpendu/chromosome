@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createapp',
@@ -7,12 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateappComponent implements OnInit {
 
-  public email:string = "";
+  public email: string = "";
+  public password: string = "";
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
-     this.email = sessionStorage.getItem("user");
+    this.email = sessionStorage.getItem("email");
+    this.password = sessionStorage.getItem("password");
+
+    console.log(this.email, this.password);
+    if (!this.email || !this.password) {
+      this.router.navigate(["/"]);
+    }
   }
 
 }
