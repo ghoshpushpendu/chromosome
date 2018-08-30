@@ -33,6 +33,7 @@ module.exports = function (User) {
         ]
       }
     }, function (err, users) {
+      console.log(users);
       if (users) {
         cb(null, users[0]);
       } else {
