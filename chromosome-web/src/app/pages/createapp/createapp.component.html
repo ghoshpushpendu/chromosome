@@ -1,5 +1,15 @@
-<img class="ui avatar image" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg">
-<span>{{email}}</span>
+<div [@userState]="userState" class="ui middle aligned divided list">
+  <div class="item">
+    <div class="right floated content" (click)="logout()">
+      <div class="ui button small yellow"><i class="icon sign-out"></i>Logout</div>
+    </div>
+    <img class="ui avatar image" src="assets/images/avatar.png" />
+    <div class="content">
+      <div class="header header-custom">{{user.fname+' '+user.lname}}</div>
+      <span class="">{{user.email}}</span>
+    </div>
+  </div>
+</div>
 
 <div class="ui centered card create-card">
   <div class="content">
@@ -19,20 +29,21 @@
           <div class="ui label">
             https://
           </div>
-          <input type="text" name="domain" placeholder="yourdomain.com">
+          <input [disabled]="loading" [(ngModel)]="application.domain" type="text" name="domain" placeholder="yourdomain.com">
         </div>
       </div>
 
       <div class="field">
         <label>Application Name</label>
         <div class="field">
-          <input type="text" name="appname" placeholder="App Name">
+          <input [disabled]="loading" [(ngModel)]="application.appname" type="text" name="applicationname" placeholder="Yourappname">
         </div>
       </div>
 
       <div class="field">
         <label>Description</label>
-        <textarea name="description" rows="2"></textarea>
+        <textarea [disabled]="loading" [(ngModel)]="application.description" placeholder="Your application description" name="description"
+          rows="2"></textarea>
       </div>
 
 
@@ -45,7 +56,7 @@
         </div>
       </div>
       <div class="ui center aligned">
-        <button [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':false}">
+        <button (click)="createapp()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading}">
           <i class="icon sign-in "></i>Create App</button>
       </div>
     </form>

@@ -76,45 +76,17 @@ export class AuthService {
     });
   }
 
-  /*********************DRUG TYPE METHOD**********************/
-  // createdrug(data) {
-  //   console.log(data)
-  //   return this.httpClient.post(APIURL + 'DrugType', data)
-  // }
-
-  // /*************************GET DRUG TYPE*******************/
-  // getDrugType() {
-  //   return this.httpClient.get(APIURL + 'DrugType')
-  // }
-  // /******************* CREATE MEDICINE MASTER*****************************/
-  // createMedicineMaster(data) {
-  //   console.log(data)
-  //   return this.httpClient.post(APIURL + 'MedicineMaster', data)
-  // }
-  // // ***********************VENDOR METHOD************************************/
-  // createVendor(data) {
-  //   console.log(data)
-  //   return this.httpClient.post(APIURL + 'Vendor', data)
-  // }
-  // /*****************************CREATE MANUFACTURE****************/
-  // createManufacture(data) {
-  //   console.log(data);
-  //   return this.httpClient.post(APIURL + 'Manufacturer', data)
-  // }
-  // /**************************GET PHARMACY DETAIL BY TRADE LICENSE ID*************************/
-  // getPharmacy(tradeId) {
-  //   console.log(tradeId)
-  //   return this.httpClient.get(APIURL + 'Pharmacy/' + tradeId)
-  // }
-
-  // /** get All manufacturer **/
-  // getAllManufacturer() {
-  //   return this.httpClient.get(APIURL + 'Manufacturer');
-  // }
-
-  // /** get all vendors **/
-  // getAllVendors() {
-  //   return this.httpClient.get(APIURL + 'Vendor');
-  // }
+  getUser(user: any) {
+    let _base = this;
+    return new Promise(function (resolve, reject) {
+      _base.httpClient.post(APIURL + 'User/getUser', user, _base.httpOptions)
+        .subscribe((data) => {
+          resolve(data);
+        },
+          (err) => {
+            reject(err);
+          })
+    });
+  }
 
 }

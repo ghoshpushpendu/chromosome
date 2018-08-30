@@ -164,7 +164,7 @@ export class LoginComponent implements OnInit {
           _base.authState.state = "logged_in";
           // set data to local storage
           sessionStorage.setItem("email", _base.user.email);
-          sessionStorage.setItem("password", _base.user.email);
+          sessionStorage.setItem("password", _base.user.password);
           this.router.navigate(['/create']);
         } else {
           _base.messages = [];
