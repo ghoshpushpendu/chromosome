@@ -126,9 +126,7 @@ export class CreateappComponent implements OnInit {
             ]
           }
         }
-      })
-      ;
-
+      });
   }
 
   // logout

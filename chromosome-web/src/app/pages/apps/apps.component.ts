@@ -79,6 +79,43 @@ export class AppsComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('.ui.form')
+      .form({
+        fields: {
+          domain: {
+            identifier: 'domain',
+            rules: [
+              {
+                type: 'empty'
+              },
+              {
+                type: 'regExp',
+                value: /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/i,
+              }
+            ]
+          },
+          appname: {
+            identifier: 'appname',
+            rules: [
+              {
+                type: 'empty'
+              },
+              {
+                type: 'regExp',
+                value: /^\s*\S+\s*$/i
+              }
+            ]
+          },
+          description: {
+            identifier: 'description',
+            rules: [
+              {
+                type: 'empty'
+              }
+            ]
+          }
+        }
+      });
   }
 
   showSuccess(message: string) {
@@ -94,4 +131,46 @@ export class AppsComponent implements OnInit {
       .modal('show');
   }
 
+  // logout
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(["/"]);
+  }
+
+  // create app
+  createapp() {
+    let valid = $('.ui.form').form('is valid')
+    if (valid) {
+      let appData: any = {};
+      appData.name = this.application.appname;
+      appData.description = this.application.description;
+      appData.appid = this.application.domain.trim() + '.' + this.application.appname.toLocaleLowerCase().trim();
+      appData.owner = this.user.email;
+      appData.status = "inactive";
+      // delete appData.domain;
+      let _base = this;
+      _base.loading = true;
+      _base.app.appexists(appData.appid)
+        .then(function (success: any) {
+          if (success.count != 1) {
+            _base.app.createapp(appData)
+              .then(function (success) {
+                _base.loading = false;
+                _base.showSuccess("App has been created");
+              }, function (error) {
+                _base.loading = false;
+                _base.showError("Can not create app")
+              });
+          } else {
+            _base.loading = false;
+            _base.showError("App name has already taken")
+          }
+        }, function (error) {
+          _base.loading = false;
+          _base.showError("Can not create app")
+        });
+    }
+  }
+
 }
+
