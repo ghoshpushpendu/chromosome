@@ -35,7 +35,7 @@ module.exports = function (User) {
     }, function (err, users) {
       console.log(users);
       if (users) {
-        cb(null, users[0]);
+        cb(null, users);
       } else {
         cb(null, {
           error: true,
