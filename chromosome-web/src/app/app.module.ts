@@ -9,6 +9,8 @@ import { CreateappComponent } from './pages/createapp/createapp.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AppsComponent } from './pages/apps/apps.component';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'create', component: CreateappComponent },
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
       timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-    })
+    }),
+    LoadingBarHttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -36,7 +36,7 @@ export class AppService {
     });
   }
 
-  appexists(appid) {
+  appexists(appid: string) {
     let _base = this;
     return new Promise(function (resolve, reject) {
       _base.httpClient.get(APIURL + "App/count?where=%7B%22appid%22%3A%22" + appid + "%22%7D")
@@ -54,6 +54,34 @@ export class AppService {
     let _base = this;
     return new Promise(function (resolve, reject) {
       _base.httpClient.get(APIURL + "App/count?where=%7B%22owner%22%3A%22resource%3Aonline.snapbase.chromosome.User%23" + email + "%22%7D")
+        .subscribe((data) => {
+          resolve(data);
+        },
+          (err) => {
+            reject(err);
+          })
+    });
+  }
+
+  // get apps by user 's email
+  getApps(email: string) {
+    let _base = this;
+    return new Promise(function (resolve, reject) {
+      _base.httpClient.get(APIURL + "App?filter=%7B%22where%22%3A%7B%22owner%22%3A%22resource%3Aonline.snapbase.chromosome.User%23" + email + "%22%7D%7D")
+        .subscribe((data) => {
+          resolve(data);
+        },
+          (err) => {
+            reject(err);
+          })
+    });
+  }
+
+  // delete app by app id / app namespace
+  deleteApp(appid: string) {
+    let _base = this;
+    return new Promise(function (resolve, reject) {
+      _base.httpClient.delete(APIURL + "App/" + appid)
         .subscribe((data) => {
           resolve(data);
         },

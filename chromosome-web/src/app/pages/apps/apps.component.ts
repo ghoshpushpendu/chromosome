@@ -51,6 +51,8 @@ export class AppsComponent implements OnInit {
     description: ''
   };
 
+  public apps: any = [];
+
   public loading: boolean = false;
 
   constructor(public router: Router, public http: AuthService, public app: AppService, private toastr: ToastrService) {
@@ -75,7 +77,23 @@ export class AppsComponent implements OnInit {
           _base.loading = false;
           _base.router.navigate(["/"]);
         });
+      this.getallapps();
     }
+  }
+
+  /** fetch all apps of the current user **/
+  getallapps() {
+    let _base = this;
+    _base.loading = true;
+    _base.app.getApps(_base.user.email)
+      .then(function (success) {
+        console.log(success);
+        _base.loading = false;
+        _base.apps = success;
+      }, function (error) {
+        _base.loading = false;
+        _base.showError("Can not fetch app list")
+      });
   }
 
   ngOnInit() {
@@ -131,6 +149,11 @@ export class AppsComponent implements OnInit {
       .modal('show');
   }
 
+  closemodal() {
+    $('.ui.mini.modal')
+      .modal('hide');
+  }
+
   // logout
   logout() {
     sessionStorage.clear();
@@ -157,6 +180,8 @@ export class AppsComponent implements OnInit {
               .then(function (success) {
                 _base.loading = false;
                 _base.showSuccess("App has been created");
+                _base.getallapps(); // fetch apps list
+                _base.closemodal();
               }, function (error) {
                 _base.loading = false;
                 _base.showError("Can not create app")
@@ -170,6 +195,17 @@ export class AppsComponent implements OnInit {
           _base.showError("Can not create app")
         });
     }
+  }
+
+  /** delete an app **/
+  deleteapp(appid: string) {
+    let _base = this;
+    _base.app.deleteApp(appid)
+      .then(function (success) {
+        _base.getallapps();
+      }, function (error) {
+
+      });
   }
 
 }

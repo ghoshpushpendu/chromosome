@@ -21,85 +21,30 @@
 
 
 <div class="ui centered cards">
-  <div class="card">
+
+  <div class="card app" *ngFor="let app of apps">
     <div class="content">
       <div class="header">
-        Elliot Fu
+        {{app.name}}
       </div>
       <div class="meta">
-        Friends of Veronika
+        {{app.appid}}
       </div>
       <div class="description">
-        Elliot requested permission to view your contact details
+        {{app.description.substring(0,50)}}
       </div>
     </div>
     <div class="extra content">
       <div class="ui two buttons">
-        <div class="ui basic green button">Approve</div>
-        <div class="ui basic red button">Decline</div>
+        <div (click)="deleteapp(app.appid)" class="ui basic negative button"><i class="icon trash"></i>Delete</div>
+        <div class="ui basic positive button"><i class="icon sign-in"></i>Browse</div>
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="content">
-      <div class="header">
-        Jenny Hess
-      </div>
-      <div class="meta">
-        New Member
-      </div>
-      <div class="description">
-        Jenny wants to add you to the group <b>best friends</b>
-      </div>
-    </div>
+
+  <div class="ui card app" (click)="openModal()">
     <div class="extra content">
-      <div class="ui two buttons">
-        <div class="ui basic green button">Approve</div>
-        <div class="ui basic red button">Decline</div>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <div class="header">
-        Jenny Hess
-      </div>
-      <div class="meta">
-        New Member
-      </div>
-      <div class="description">
-        Jenny wants to add you to the group <b>best friends</b>
-      </div>
-    </div>
-    <div class="extra content">
-      <div class="ui two buttons">
-        <div class="ui basic green button">Approve</div>
-        <div class="ui basic red button">Decline</div>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="content">
-      <div class="header">
-        Jenny Hess
-      </div>
-      <div class="meta">
-        New Member
-      </div>
-      <div class="description">
-        Jenny wants to add you to the group <b>best friends</b>
-      </div>
-    </div>
-    <div class="extra content">
-      <div class="ui two buttons">
-        <div class="ui basic green button">Approve</div>
-        <div class="ui basic red button">Decline</div>
-      </div>
-    </div>
-  </div>
-  <div class="ui centered card" (click)="openModal()">
-    <div class="extra content">
-      <img src="./assets/images/add.png" class="ui image small" />
+      <img src="./assets/images/add.png" class="ui image small centerimg" />
     </div>
   </div>
 
@@ -132,7 +77,7 @@
           <div class="field">
             <label>Application Name</label>
             <div class="field">
-              <input [disabled]="loading" [(ngModel)]="application.appname" type="text" name="applicationname" placeholder="Yourappname">
+              <input [disabled]="loading" [(ngModel)]="application.appname" type="text" name="appname" placeholder="Yourappname">
             </div>
           </div>
 
@@ -152,7 +97,9 @@
             </div>
           </div>
           <div class="ui center aligned">
-            <button (click)="createapp()" class="ui button positive" [ngClass]="{'loading':false}">
+            <button [disabled]="loading" (click)="closemodal()" class="ui button negative">
+              <i class="icon close"></i>Cancel</button>
+            <button (click)="createapp()" class="ui button positive" [ngClass]="{'loading':loading}">
               <i class="icon sign-in "></i>Create App</button>
           </div>
         </form>
