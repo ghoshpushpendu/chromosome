@@ -8,10 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateappComponent } from './pages/createapp/createapp.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AppsComponent } from './pages/apps/apps.component';
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'create', component: CreateappComponent }
-  // { path: 'hero/:id', component: HeroDetailComponent },
+  { path: 'create', component: CreateappComponent },
+  { path: 'apps', component: AppsComponent },
   // {
   //   path: 'heroes',
   //   component: HeroListComponent,
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    CreateappComponent
+    CreateappComponent,
+    AppsComponent
   ],
   imports: [
     BrowserModule,

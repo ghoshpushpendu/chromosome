@@ -1,0 +1,161 @@
+<div class="ui menu">
+  <a class="item">
+    <img src="./assets/images/science-mini.png" />
+  </a>
+  <!-- <a class="item left"> -->
+  <!-- <h1 class="center aligned header header-custom">CHROMOSOME</h1> -->
+  <!-- </a> -->
+  <a [@userState]="userState" class="item right">
+    <img class="ui avatar image" src="assets/images/avatar.png" />
+    <div class="content">
+      <div class="header header-custom">{{user.fname+' '+user.lname}}</div>
+      <span class="">{{user.email}}</span>
+    </div>
+  </a>
+  <a [@userState]="userState" class="item">
+    <div class="right floated content" (click)="logout()">
+      <div class="ui button small yellow"><i class="icon sign-out"></i>Logout</div>
+    </div>
+  </a>
+</div>
+
+
+<div class="ui centered cards">
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Elliot Fu
+      </div>
+      <div class="meta">
+        Friends of Veronika
+      </div>
+      <div class="description">
+        Elliot requested permission to view your contact details
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <div class="ui basic green button">Approve</div>
+        <div class="ui basic red button">Decline</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Jenny Hess
+      </div>
+      <div class="meta">
+        New Member
+      </div>
+      <div class="description">
+        Jenny wants to add you to the group <b>best friends</b>
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <div class="ui basic green button">Approve</div>
+        <div class="ui basic red button">Decline</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Jenny Hess
+      </div>
+      <div class="meta">
+        New Member
+      </div>
+      <div class="description">
+        Jenny wants to add you to the group <b>best friends</b>
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <div class="ui basic green button">Approve</div>
+        <div class="ui basic red button">Decline</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        Jenny Hess
+      </div>
+      <div class="meta">
+        New Member
+      </div>
+      <div class="description">
+        Jenny wants to add you to the group <b>best friends</b>
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <div class="ui basic green button">Approve</div>
+        <div class="ui basic red button">Decline</div>
+      </div>
+    </div>
+  </div>
+  <div class="ui centered card" (click)="openModal()">
+    <div class="extra content">
+      <img src="./assets/images/add.png" class="ui image small" />
+    </div>
+  </div>
+
+  <!-- app create modal -->
+
+  <div class="ui mini modal">
+    <!-- <i class="close icon"></i> -->
+    <div class="ui centered card create-card">
+      <div class="content">
+        <img class="ui tiny image" src="assets/images/science-mini.png" />
+        <div class="center aligned header header-custom">CHROMOSOME</div>
+        <div class="center aligned description tagline">
+          <p>Your decentralized codeless smart backend</p>
+        </div>
+      </div>
+      <div class="extra content">
+        <form class="ui form">
+          <h4 class="ui dividing header">Create your decentralized app</h4>
+
+          <div class="field">
+            <label>Domain</label>
+            <div class="ui labeled input">
+              <div class="ui label">
+                https://
+              </div>
+              <input [disabled]="loading" [(ngModel)]="application.domain" type="text" name="domain" placeholder="yourdomain.com">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Application Name</label>
+            <div class="field">
+              <input [disabled]="loading" [(ngModel)]="application.appname" type="text" name="applicationname" placeholder="Yourappname">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Description</label>
+            <textarea [disabled]="loading" [(ngModel)]="application.description" placeholder="Your application description" name="description"
+              rows="2"></textarea>
+          </div>
+
+
+          <div class="ui segment">
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <input type="checkbox" checked="checked" name="gift" tabindex="0" class="hidden">
+                <label>I agree to the terms and condition of snapbase</label>
+              </div>
+            </div>
+          </div>
+          <div class="ui center aligned">
+            <button (click)="createapp()" class="ui button positive" [ngClass]="{'loading':false}">
+              <i class="icon sign-in "></i>Create App</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

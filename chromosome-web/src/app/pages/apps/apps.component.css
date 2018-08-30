@@ -2,6 +2,7 @@
     box-shadow: none;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    width: auto !important;
 }
 
 .header-custom{
@@ -13,9 +14,6 @@
     color:rgb(91, 187, 71) !important;
 }
 
-.ui.container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.user{
+    
 }

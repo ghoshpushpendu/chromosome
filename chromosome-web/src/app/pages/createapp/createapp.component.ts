@@ -10,7 +10,6 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { forEach } from '@angular/router/src/utils/collection';
 
 declare var $;
 
@@ -65,6 +64,18 @@ export class CreateappComponent implements OnInit {
         email: this.user.email,
         password: this.user.password
       }
+
+      _base.app.countApps(sessionStorage.getItem("email"))
+        .then(function (success: any) {
+          if (success.count >= 1) {
+            // send to list page
+            _base.router.navigate(["apps"]);
+          }
+        }, function (error) {
+          _base.router.navigate(["/"]);
+          _base.showError("Can not fetch app list")
+        });
+
       _base.loading = true;
       this.http.getUser(user)
         .then(function (success: any) {
@@ -160,6 +171,7 @@ export class CreateappComponent implements OnInit {
         });
     }
   }
+
   showSuccess(message: string) {
     this.toastr.success(message, 'SUCCESS');
   }

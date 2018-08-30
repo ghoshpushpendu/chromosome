@@ -49,4 +49,18 @@ export class AppService {
     });
   }
 
+  //count apps by user ID
+  countApps(email: String) {
+    let _base = this;
+    return new Promise(function (resolve, reject) {
+      _base.httpClient.get(APIURL + "App/count?where=%7B%22owner%22%3A%22resource%3Aonline.snapbase.chromosome.User%23" + email + "%22%7D")
+        .subscribe((data) => {
+          resolve(data);
+        },
+          (err) => {
+            reject(err);
+          })
+    });
+  }
+
 }

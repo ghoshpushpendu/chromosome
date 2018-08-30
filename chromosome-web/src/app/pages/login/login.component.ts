@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../providers/auth.service';
 import { Router } from '@angular/router';
+import { AppService } from './../../providers/app.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $;
 
@@ -27,9 +29,10 @@ export class LoginComponent implements OnInit {
   public messages: any = [];
   public message_type: string = '';
 
-  constructor(public auth: AuthService, public router: Router) {
+  constructor(private toastr: ToastrService, public auth: AuthService, public router: Router, public app: AppService) {
+    let _base = this;
     if (sessionStorage.getItem("email") && sessionStorage.getItem("password")) {
-      this.router.navigate(["/create"]);
+      _base.router.navigate(["apps"]);
     }
   }
 
@@ -165,7 +168,7 @@ export class LoginComponent implements OnInit {
           // set data to local storage
           sessionStorage.setItem("email", _base.user.email);
           sessionStorage.setItem("password", _base.user.password);
-          this.router.navigate(['/create']);
+          _base.router.navigate(["apps"]);
         } else {
           _base.messages = [];
           _base.messages.push("No user exists");
@@ -183,6 +186,14 @@ export class LoginComponent implements OnInit {
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+  }
+
+  showSuccess(message: string) {
+    this.toastr.success(message, 'SUCCESS');
+  }
+
+  showError(message: any) {
+    this.toastr.warning(message, 'ERROR');
   }
 
 }

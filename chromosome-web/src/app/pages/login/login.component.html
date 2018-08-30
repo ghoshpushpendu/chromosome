@@ -1,82 +1,85 @@
-<div class="ui centered card create-card">
-  <div class="content">
-    <img class="ui tiny image" src="assets/images/science-mini.png" />
-    <div class="center aligned header header-custom">CHROMOSOME</div>
-    <div class="center aligned description tagline">
-      <p>Your decentralized codeless smart backend</p>
-    </div>
-  </div>
-  <div class="extra content">
-
-    <!-- form one -->
-    <div *ngIf="authState.state == 'email_validity'" class="ui form" autocomplete="off" (submit)="submit()">
-      <div class="field">
-        <label>Email</label>
-        <input type="text" [disabled]="loading" [(ngModel)]="user.email" #ctrl="ngModel" name="chromosomeemail" autocomplete="false"
-          placeholder="Valid email address">
-      </div>
-      <div class="ui center aligned">
-        <button [ngClass]="{'positive': true, 'ui': true, 'button': true,'loading':loading}" (click)="verifyEmail()">
-          <i class="icon sign-in"></i> Verify Now</button>
+<div class="ui container">
+  <div class="ui centered card create-card">
+    <div class="content">
+      <img class="ui tiny image" src="assets/images/science-mini.png" />
+      <div class="center aligned header header-custom">CHROMOSOME</div>
+      <div class="center aligned description tagline">
+        <p>Your decentralized codeless smart backend</p>
       </div>
     </div>
+    <div class="extra content">
 
-    <!-- form two -->
-    <div class="ui form" *ngIf="this.authState.state == 'get_password'" autocomplete="off" (submit)="submit()">
-      <div class="field">
-        <label>Email</label>
-        <input type="text" name="chromosomeemail" [disabled]="loading" [(ngModel)]="user.email" #ctrl="ngModel" value="" disabled autocomplete="false" placeholder="Valid email address">
+      <!-- form one -->
+      <div *ngIf="authState.state == 'email_validity'" class="ui form" autocomplete="off" (submit)="submit()">
+        <div class="field">
+          <label>Email</label>
+          <input type="text" [disabled]="loading" [(ngModel)]="user.email" #ctrl="ngModel" name="chromosomeemail" autocomplete="false"
+            placeholder="Valid email address">
+        </div>
+        <div class="ui center aligned">
+          <button [ngClass]="{'positive': true, 'ui': true, 'button': true,'loading':loading}" (click)="verifyEmail()">
+            <i class="icon sign-in"></i> Verify Now</button>
+        </div>
       </div>
-      <div class="field">
-        <label>Password</label>
-        <input type="password" [disabled]="loading" [(ngModel)]="user.password" #ctrl="ngModel" name="chromosomepassword" autocomplete="false"
-          placeholder="Password for this account">
-      </div>
-      <div class="ui center aligned">
-        <button (click)="authenticateUser()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading} ">
-          <i class="icon sign-in "></i>Authenticate Now</button>
-      </div>
-    </div>
 
-    <!-- final registration -->
-    <div class="ui form " *ngIf="this.authState.state=='basic_info'" autocomplete="off " (submit)="submit() ">
-      <div class="field ">
-        <label>Email</label>
-        <input type="text" [disabled]="true" [(ngModel)]="user.email" #ctrl="ngModel" name="chromosomeemail" autocomplete="false"
-          placeholder="Valid email address">
+      <!-- form two -->
+      <div class="ui form" *ngIf="this.authState.state == 'get_password'" autocomplete="off" (submit)="submit()">
+        <div class="field">
+          <label>Email</label>
+          <input type="text" name="chromosomeemail" [disabled]="loading" [(ngModel)]="user.email" #ctrl="ngModel" value="" disabled
+            autocomplete="false" placeholder="Valid email address">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" [disabled]="loading" [(ngModel)]="user.password" #ctrl="ngModel" name="chromosomepassword" autocomplete="false"
+            placeholder="Password for this account">
+        </div>
+        <div class="ui center aligned">
+          <button (click)="authenticateUser()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading} ">
+            <i class="icon sign-in "></i>Authenticate Now</button>
+        </div>
       </div>
-      <div class="field ">
-        <label>First Name</label>
-        <input type="text" [(ngModel)]="user.fname" #ctrl="ngModel" name="chromosomefname " autocomplete="false
+
+      <!-- final registration -->
+      <div class="ui form " *ngIf="this.authState.state=='basic_info'" autocomplete="off " (submit)="submit() ">
+        <div class="field ">
+          <label>Email</label>
+          <input type="text" [disabled]="true" [(ngModel)]="user.email" #ctrl="ngModel" name="chromosomeemail" autocomplete="false"
+            placeholder="Valid email address">
+        </div>
+        <div class="field ">
+          <label>First Name</label>
+          <input type="text" [(ngModel)]="user.fname" #ctrl="ngModel" name="chromosomefname " autocomplete="false
           " placeholder="First Name ">
-      </div>
-      <div class="field ">
-        <label>Last Name</label>
-        <input type="text" [(ngModel)]="user.lname" #ctrl="ngModel" name="chromosomelname " autocomplete="false
+        </div>
+        <div class="field ">
+          <label>Last Name</label>
+          <input type="text" [(ngModel)]="user.lname" #ctrl="ngModel" name="chromosomelname " autocomplete="false
           " placeholder="Last Name ">
-      </div>
-      <div class="field ">
-        <label>Password</label>
-        <input type="password" [(ngModel)]="user.password" #ctrl="ngModel" name="chromosomepassword " autocomplete="false
+        </div>
+        <div class="field ">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="user.password" #ctrl="ngModel" name="chromosomepassword " autocomplete="false
           " placeholder="Password for this account ">
+        </div>
+        <div class="ui center aligned">
+          <button (click)="registerUser()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading}">
+            <i class="icon sign-in "></i>Register Now</button>
+        </div>
       </div>
-      <div class="ui center aligned">
-        <button (click)="registerUser()" [ngClass]="{ 'positive': true, 'ui': true, 'button': true, 'loading':loading}">
-          <i class="icon sign-in "></i>Register Now</button>
+
+
+      <!-- message area -->
+      <div [ngClass]="{'ui':true,'floating':true,'success':(message_type=='success'),'error':(message_type=='error'),'info':(message_type=='info'),'message':true}"
+        *ngIf="messages.length != 0">
+        <div class="header">
+          Notifications
+        </div>
+        <ul class="list">
+          <li *ngFor="let message of messages">{{message}}</li>
+        </ul>
       </div>
+
     </div>
-
-
-    <!-- message area -->
-    <div [ngClass]="{'ui':true,'floating':true,'success':(message_type=='success'),'error':(message_type=='error'),'info':(message_type=='info'),'message':true}"
-      *ngIf="messages.length != 0">
-      <div class="header">
-        Notifications
-      </div>
-      <ul class="list">
-        <li *ngFor="let message of messages">{{message}}</li>
-      </ul>
-    </div>
-
   </div>
 </div>
