@@ -182,6 +182,11 @@ export class AppsComponent implements OnInit {
                 _base.showSuccess("App has been created");
                 _base.getallapps(); // fetch apps list
                 _base.closemodal();
+                _base.application = {
+                  domain: '',
+                  appname: '',
+                  description: ''
+                }
               }, function (error) {
                 _base.loading = false;
                 _base.showError("Can not create app")
