@@ -27,7 +27,7 @@ module.exports = function (App) {
     //  FETCH USER DETAIL 
     User.findOne({ where: { email: email } }, function (err, user) {
       let author = user.fname + ' ' + user.lname;
-      createPackageJSON(name, email, author)
+      createPackageJSON(name, namespace, email, author)
         .then(function (success) {
           next();
         });
@@ -37,8 +37,17 @@ module.exports = function (App) {
     // next();
   });
 
+  App.observe('after delete', function (ctx, next) {
+    let app = ctx.where.appid;
+    cmd(`
+    cd ~/developments/
+    rm -rf `+ app);
+    next();
+  });
 
-  function createPackageJSON(name, email, author) {
+
+
+  function createPackageJSON(name, namespace, email, author) {
     return new Promise(function (resolve, reject) {
       let package_json = toString(
         {
@@ -80,8 +89,8 @@ module.exports = function (App) {
       );
       cmd(`
       cd ~/developments/
-      git clone https://github.com/ghoshpushpendu/hyperledger-network.git `+ name + `
-      cd `+ name + `
+      git clone https://github.com/ghoshpushpendu/hyperledger-network.git `+ namespace + `
+      cd `+ namespace + `
       cat <<EOT >> package.json
       {
           "engines": {
